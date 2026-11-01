@@ -1,7 +1,7 @@
 # Prog Trance Time Capsule
 
 A ranked time capsule of the **top 50 progressive trance tracks of 2009–2012** —
-the Anjunabeats golden era. Dark euphoric design with sunrise gradients.
+the Anjunabeats golden era. Dark euphoric design — deep navy, volumetric club beams, ice-blue light; no sunsets.
 
 - Single static page (`index.html`) — no build step, no backend
 - Each entry: artist, title, year, label, and a YouTube search link
