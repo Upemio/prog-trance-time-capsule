@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prog Trance Time Capsule — Top 50 of 2009–2012</title>
+<meta name="description" content="A ranked time capsule of the top 50 progressive trance tracks from the golden era, 2009–2012. Dark euphoric design, filterable by year.">
+<style>
+  :root{
+    --bg:#070510;
+    --bg2:#0d0a1e;
+    --card:#12102a;
+    --card2:#171336;
+    --ink:#f3eefc;
+    --muted:#a79fc9;
+    --amber:#ffb347;
+    --rose:#ff5e8a;
+    --violet:#8b5cf6;
+    --sunrise:linear-gradient(135deg,#ffb347 0%,#ff5e8a 48%,#8b5cf6 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+    background:radial-gradient(1200px 600px at 50% -10%,#241a4d 0%,var(--bg) 55%) fixed,var(--bg);
+    color:var(--ink);
+    min-height:100vh;
+  }
+  .hero{position:relative;text-align:center;padding:64px 20px 40px;overflow:hidden}
+  .sun{
+    position:absolute;left:50%;top:-120px;transform:translateX(-50%);
+    width:340px;height:340px;border-radius:50%;
+    background:radial-gradient(circle,#ffd9a0 0%,#ff9a5c 35%,#ff5e8a 60%,rgba(139,92,246,.0) 72%);
+    filter:blur(2px);opacity:.85;pointer-events:none;
+  }
+  .horizon{
+    position:absolute;left:0;right:0;top:170px;height:3px;pointer-events:none;
+    background:linear-gradient(90deg,transparent,var(--amber) 20%,var(--rose) 50%,var(--violet) 80%,transparent);
+    filter:blur(6px);opacity:.7;
+  }
+  .stars{position:absolute;inset:0;pointer-events:none;opacity:.5}
+  .eyebrow{position:relative;letter-spacing:.35em;text-transform:uppercase;font-size:.75rem;color:var(--amber);margin-bottom:14px}
+  h1{
+    position:relative;font-size:clamp(2.2rem,6vw,4.2rem);font-weight:800;line-height:1.05;
+    background:var(--sunrise);-webkit-background-clip:text;background-clip:text;color:transparent;
+    margin-bottom:12px;
+  }
+  .sub{position:relative;color:var(--muted);font-size:1.05rem;max-width:640px;margin:0 auto}
+  .filters{position:relative;display:flex;flex-wrap:wrap;gap:10px;justify-content:center;padding:28px 20px 6px}
+  .pill{
+    cursor:pointer;border:1px solid #2b2560;background:#141127;color:var(--muted);
+    padding:9px 18px;border-radius:999px;font-size:.9rem;transition:all .18s ease;
+  }
+  .pill:hover{border-color:var(--rose);color:var(--ink)}
+  .pill.active{background:var(--sunrise);border-color:transparent;color:#0b0716;font-weight:700}
+  .pill .n{opacity:.75;font-weight:600;margin-left:6px}
+  .pill.active .n{opacity:.9}
+  .grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    gap:16px;padding:26px clamp(16px,4vw,56px) 60px;max-width:1280px;margin:0 auto;
+  }
+  .card{
+    position:relative;background:linear-gradient(160deg,var(--card2),var(--card));
+    border:1px solid #26205a;border-radius:16px;padding:20px 20px 16px;
+    display:flex;gap:14px;align-items:flex-start;
+    transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+  }
+  .card:hover{transform:translateY(-3px);border-color:#4a3a8f;box-shadow:0 12px 32px rgba(255,94,138,.12)}
+  .card::before{
+    content:"";position:absolute;inset:0 0 auto 0;height:2px;border-radius:16px 16px 0 0;
+    background:var(--sunrise);opacity:.55;
+  }
+  .rank{
+    flex:0 0 auto;font-size:2rem;font-weight:800;min-width:52px;text-align:center;
+    background:var(--sunrise);-webkit-background-clip:text;background-clip:text;color:transparent;
+    padding-top:2px;
+  }
+  .meta{flex:1;min-width:0}
+  .artist{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);margin-bottom:4px}
+  .title{font-size:1.12rem;font-weight:700;line-height:1.3;margin-bottom:8px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+  .year{
+    font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:999px;
+    background:rgba(139,92,246,.18);border:1px solid rgba(139,92,246,.5);color:#cbb8ff;
+  }
+  .label{font-size:.75rem;color:var(--muted)}
+  .yt{
+    display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+    font-size:.82rem;font-weight:600;color:#0b0716;
+    background:var(--sunrise);padding:7px 14px;border-radius:999px;
+    transition:filter .15s ease;
+  }
+  .yt:hover{filter:brightness(1.12)}
+  .empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:60px 0}
+  footer{border-top:1px solid #221d4d;padding:26px 20px 40px;text-align:center;color:var(--muted);font-size:.82rem;line-height:1.7}
+  footer .sig{background:var(--sunrise);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="sun"></div>
+  <div class="stars" id="stars"></div>
+  <div class="horizon"></div>
+  <div class="eyebrow">2009 — 2012 · The Golden Era</div>
+  <h1>Prog Trance<br>Time Capsule</h1>
+  <p class="sub">The top 50 progressive trance anthems of 2009–2012, ranked. Dark rooms, sunrise breakdowns, hands in the air.</p>
+</header>
+
+<nav class="filters" id="filters" aria-label="Filter by year"></nav>
+
+<main class="grid" id="grid"></main>
+
+<footer>
+  <div class="sig">🌅 built for the sunrise sets 🌅</div>
+  <p>A curated ranking from the Anjunabeats golden era — artist, title, year and label<br>shown to the best of our knowledge. YouTube links open a search for each track.</p>
+</footer>
+
+<script type="application/json" id="track-data">
+[
+ {"artist":"Above & Beyond","title":"Sun & Moon","year":2011,"label":"Anjunabeats"},
+ {"artist":"Deadmau5","title":"Strobe","year":2009,"label":"mau5trap"},
+ {"artist":"Above & Beyond","title":"Anjunabeach","year":2009,"label":"Anjunabeats"},
+ {"artist":"Arty","title":"Around the World","year":2011,"label":"Anjunabeats"},
+ {"artist":"Mat Zo & Arty","title":"Rebound","year":2011,"label":"Anjunabeats"},
+ {"artist":"Above & Beyond feat. Richard Bedford","title":"Thing Called Love","year":2011,"label":"Anjunabeats"},
+ {"artist":"Cosmic Gate & Emma Hewitt","title":"Be Your Sound","year":2011,"label":"Black Hole Recordings"},
+ {"artist":"Aly & Fila","title":"We Control the Sunlight","year":2011,"label":"Future Sound of Egypt"},
+ {"artist":"Arty","title":"Rush","year":2010,"label":"Anjunabeats"},
+ {"artist":"Andrew Bayer","title":"From Earth","year":2010,"label":"Anjunabeats"},
+ {"artist":"Mat Zo","title":"Bipolar","year":2011,"label":"Anjunabeats"},
+ {"artist":"Arty","title":"Kate","year":2011,"label":"Enhanced"},
+ {"artist":"Mat Zo","title":"24 Hours","year":2010,"label":"Anjunabeats"},
+ {"artist":"Above & Beyond","title":"Alchemy","year":2012,"label":"Anjunabeats"},
+ {"artist":"Mat Zo & Porter Robinson","title":"Easy","year":2012,"label":"Ministry of Sound"},
+ {"artist":"Tritonal","title":"Piercing the Quiet","year":2011,"label":"Enhanced"},
+ {"artist":"Above & Beyond","title":"Formula Rossa","year":2011,"label":"Anjunabeats"},
+ {"artist":"Andrew Bayer","title":"England","year":2012,"label":"Anjunabeats"},
+ {"artist":"Norin & Rad","title":"Bloom","year":2011,"label":"Anjunabeats"},
+ {"artist":"Oliver Smith","title":"Cadence","year":2011,"label":"Anjunabeats"},
+ {"artist":"Arty","title":"Gentle Touch","year":2009,"label":"Enhanced Progressive"},
+ {"artist":"Above & Beyond pres. OceanLab","title":"Lonely Girl (Gareth Emery Remix)","year":2009,"label":"Anjunabeats"},
+ {"artist":"BT","title":"Suddenly","year":2010,"label":"Nettwerk"},
+ {"artist":"Michael Cassette","title":"Ghost in the Machine","year":2010,"label":"Anjunadeep"},
+ {"artist":"Mat Zo","title":"Synapse Dynamics","year":2009,"label":"Anjunabeats"},
+ {"artist":"Andrew Bayer","title":"To the Six","year":2009,"label":"Anjunabeats"},
+ {"artist":"Jaytech","title":"Metropolitan","year":2009,"label":"Anjunadeep"},
+ {"artist":"Tritonal","title":"Evangelia","year":2009,"label":"Fraction Records"},
+ {"artist":"Ferry Corsten","title":"We Belong (Tritonal Remix)","year":2009,"label":"Flashover Recordings"},
+ {"artist":"Cosmic Gate","title":"Sign of the Times","year":2009,"label":"Black Hole Recordings"},
+ {"artist":"Boom Jinx & Oliver Smith","title":"Sunrise","year":2009,"label":"Anjunabeats"},
+ {"artist":"Boom Jinx","title":"Phoenix from the Flames","year":2011,"label":"Anjunabeats"},
+ {"artist":"Boom Jinx & Meredith Call","title":"The Dark","year":2012,"label":"Anjunabeats"},
+ {"artist":"Soundprank","title":"Beginnings","year":2011,"label":"Enhanced Progressive"},
+ {"artist":"Audien","title":"Eventide","year":2012,"label":"Anjunabeats"},
+ {"artist":"Adam Szabo & Johan Vilborg","title":"Two to One","year":2009,"label":"Enhanced Progressive"},
+ {"artist":"Oliver Smith","title":"Tomahawk","year":2009,"label":"Anjunabeats"},
+ {"artist":"Super8 & Tab","title":"Irufushi","year":2010,"label":"Anjunabeats"},
+ {"artist":"Tritonal","title":"Lifted","year":2010,"label":"Air Up There"},
+ {"artist":"Tritonal feat. Cristina Soto","title":"Hands to Hold Me","year":2010,"label":"Air Up There"},
+ {"artist":"Parker & Hanson","title":"Afterthought","year":2010,"label":"Anjunabeats"},
+ {"artist":"Jaytech","title":"Overdrive","year":2010,"label":"Anjunadeep"},
+ {"artist":"Boom Jinx & Jaytech","title":"Milano","year":2010,"label":"Anjunadeep"},
+ {"artist":"Kyau & Albert","title":"Always a Fool","year":2011,"label":"Euphonic"},
+ {"artist":"Mike Koglin vs. 7 Skies","title":"Vision","year":2012,"label":"Anjunabeats"},
+ {"artist":"Arty, Nadia Ali & BT","title":"Must Be the Love","year":2012,"label":"Armada Music"},
+ {"artist":"Markus Schulz","title":"Do You Dream","year":2010,"label":"Coldharbour Recordings"},
+ {"artist":"Signalrunners","title":"Don't Go","year":2009,"label":"Anjunabeats"},
+ {"artist":"Reeves feat. Alan Rigg","title":"Call of Love (Daniel Kandi's Emotive Mix)","year":2009,"label":"Enhanced"},
+ {"artist":"Above & Beyond feat. Richard Bedford","title":"On My Way to Heaven","year":2012,"label":"Anjunabeats"}
+]
+</script>
+
+<script>
+(function(){
+  const tracks = JSON.parse(document.getElementById('track-data').textContent);
+  const grid = document.getElementById('grid');
+  const filtersEl = document.getElementById('filters');
+  const years = ['all', 2009, 2010, 2011, 2012];
+  let active = 'all';
+
+  const counts = {all: tracks.length};
+  tracks.forEach(t => { counts[t.year] = (counts[t.year]||0)+1; });
+
+  function ytLink(t){
+    const q = encodeURIComponent(t.artist + ' ' + t.title);
+    return 'https://www.youtube.com/results?search_query=' + q;
+  }
+
+  function card(t, i){
+    const el = document.createElement('article');
+    el.className = 'card';
+    el.innerHTML =
+      '<div class="rank">' + (i+1) + '</div>' +
+      '<div class="meta">' +
+        '<div class="artist">' + esc(t.artist) + '</div>' +
+        '<div class="title">' + esc(t.title) + '</div>' +
+        '<div class="tags"><span class="year">' + t.year + '</span>' +
+        '<span class="label">' + esc(t.label) + '</span></div>' +
+        '<a class="yt" href="' + ytLink(t) + '" target="_blank" rel="noopener">▶&nbsp;Search YouTube</a>' +
+      '</div>';
+    return el;
+  }
+
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    })[c]);
+  }
+
+  function render(){
+    grid.innerHTML = '';
+    const list = tracks.filter(t => active === 'all' || t.year === active);
+    if(!list.length){
+      grid.innerHTML = '<div class="empty">No tracks for this year.</div>';
+      return;
+    }
+    list.forEach((t, idx) => grid.appendChild(card(t, tracks.indexOf(t))));
+  }
+
+  function renderFilters(){
+    filtersEl.innerHTML = '';
+    years.forEach(y => {
+      const b = document.createElement('button');
+      b.className = 'pill' + (active === y ? ' active' : '');
+      const label = y === 'all' ? 'All Years' : y;
+      b.innerHTML = esc(label) + '<span class="n">' + (counts[y]||0) + '</span>';
+      b.setAttribute('aria-pressed', active === y ? 'true' : 'false');
+      b.addEventListener('click', () => { active = y; renderFilters(); render(); });
+      filtersEl.appendChild(b);
+    });
+  }
+
+  // starfield
+  (function(){
+    const c = document.getElementById('stars');
+    let html = '';
+    for(let i=0;i<70;i++){
+      const x = (Math.random()*100).toFixed(1), y = (Math.random()*55).toFixed(1),
+            s = (Math.random()*2+1).toFixed(1), o = (Math.random()*0.7+0.2).toFixed(2);
+      html += '<span style="position:absolute;left:'+x+'%;top:'+y+'%;width:'+s+'px;height:'+s+'px;border-radius:50%;background:#fff;opacity:'+o+'"></span>';
+    }
+    c.innerHTML = html;
+  })();
+
+  renderFilters();
+  render();
+})();
+</script>
+</body>
+</html>
